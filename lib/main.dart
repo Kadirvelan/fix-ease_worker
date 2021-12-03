@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         "/login": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
         "/pick_location": (context) => PickLocation(),
-        '/register_details': (context) => RegisterDetails(), //LocationMain() //
+        '/register_details': (context) => RegisterDetails(), //LocationMain()
         '/show_workers': (context) => ShowWorkers(),
       },
     );
