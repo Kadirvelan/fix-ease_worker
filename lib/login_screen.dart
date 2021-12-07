@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white10,
+        backgroundColor: Colors.blueGrey,
         title: Hero(
           tag: 'title',
           child: Text(
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/SplashScreen2.jpg"),
+                    image: AssetImage("assets/images/Repair-tools.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
-                    vertical: 75.0,
+                    vertical: 55.0,
                   ),
                   child: Container(
                     decoration: BoxDecoration(

@@ -141,6 +141,7 @@ Widget buildBtn(String btntext, BuildContext context) {
         } else if (btntext == 'Confirm details') {
           DatabaseMethods().adduserInfoToDB({
             "UserName": userNameController.text,
+            "Designation": designationValue,
             "Latitude": markerLatLong?.latitude,
             "Longitude": markerLatLong?.longitude,
             "Address": addressController.text,

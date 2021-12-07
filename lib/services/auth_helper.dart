@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'database.dart ';
 
-FirebaseAuth auth = FirebaseAuth.instance;
+FirebaseApp secondaryApp = Firebase.app('fixatease_worker');
+FirebaseAuth auth =
+    FirebaseAuth.instanceFor(app: secondaryApp); //FirebaseAuth.instance
 
 String userMail = '';
 String userPass = '';
@@ -20,13 +22,14 @@ displayDialog(BuildContext context, String text) {
 }
 
 signUp(BuildContext context) async {
+  Firebase.initializeApp();
   if (userPass == userPassConf) {
     print(userPassConf);
     print(userMail);
     try {
       userCredential = await auth.createUserWithEmailAndPassword(
           email: userMail, password: userPassConf);
-      Navigator.pushNamed(context, '/login');
+      Navigator.pushNamed(context, '/pick_location');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -43,11 +46,12 @@ signUp(BuildContext context) async {
 }
 
 signIn(BuildContext context) async {
+  Firebase.initializeApp();
   try {
-    userCredential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: userMail, password: userPass);
+    userCredential = await auth.signInWithEmailAndPassword(
+        email: userMail, password: userPass);
     if (userCredential != null) {
-      await Navigator.pushNamed(context, '/pick_location');
+      await Navigator.pushNamed(context, '/show_workers');
     }
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {

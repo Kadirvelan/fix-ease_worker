@@ -16,7 +16,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white10,
+        backgroundColor: Colors.blueGrey,
         title: Hero(
           tag: 'title',
           child: Text(
@@ -39,7 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/SplashScreen2.jpg"),
+                    image: AssetImage("assets/images/Repair-tools.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -67,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 40.0,
-                    vertical: 70.0,
+                    vertical: 50.0,
                   ),
                   child: Container(
                     decoration: BoxDecoration(

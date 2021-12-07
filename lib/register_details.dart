@@ -16,8 +16,10 @@ final TextEditingController altphoneNumberController = TextEditingController();
 final TextEditingController addressController = TextEditingController();
 final TextEditingController userNameController = TextEditingController();
 DateTime dateofbirth = DateTime.now();
+String designationValue = 'Electrician';
 
 class _RegisterDetailsState extends State<RegisterDetails> {
+  var items = ['Electrician', 'Carpenter', 'Plumber'];
   @override
   void initState() {
     // TODO: implement initState
@@ -68,6 +70,41 @@ class _RegisterDetailsState extends State<RegisterDetails> {
                   style: kHintTextStyle,
                   decoration: kTextDecoration(
                       Icons.add_location_alt_sharp, "Enter your address"),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Designation",
+                style: kLabelStyle,
+              ),
+              const SizedBox(height: 10.0),
+              Container(
+                decoration: BoxDecoration(
+                  color: kAppBlue,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: DropdownButton(
+                  dropdownColor: kAppBlue,
+                  value: designationValue,
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                        value: items,
+                        child: Text(
+                          items,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ));
+                  }).toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      designationValue = newValue!.toString();
+                    });
+                  },
                 ),
               ),
               const SizedBox(

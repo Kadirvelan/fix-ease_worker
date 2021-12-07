@@ -8,7 +8,7 @@ User? user = auth.currentUser;
 class DatabaseMethods {
   Future adduserInfoToDB(Map<String, dynamic> userInfoMap) async {
     return FirebaseFirestore.instance
-        .collection("users")
+        .collection("workers")
         .doc(user?.email)
         .set(userInfoMap);
   }

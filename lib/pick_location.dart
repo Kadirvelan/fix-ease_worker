@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:fixatease_worker/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,11 +14,24 @@ class PickLocation extends StatefulWidget {
 }
 
 late String? markerAddress = '';
-late LatLng? markerLatLong = LatLng(13.010651, 80.2331943);
+LatLng? markerLatLong = LatLng(double.nan, double.nan);
 
 class _PickLocationState extends State<PickLocation> {
-  static const _initialCameraPosition =
-      CameraPosition(target: LatLng(13.010651, 80.2331943), zoom: 17);
+  static LocationSettings locationSettings = const LocationSettings(
+    accuracy: LocationAccuracy.high,
+    distanceFilter: 100,
+  );
+  StreamSubscription<Position> positionStream =
+      Geolocator.getPositionStream(locationSettings: locationSettings)
+          .listen((Position position) {
+    print(position == null
+        ? 'Unknown'
+        : position.latitude.toString() +
+            ', ' +
+            position.longitude.toString() +
+            ' Stream Position');
+    markerLatLong = LatLng(position.latitude, position.longitude);
+  });
 
   late GoogleMapController _googleMapController;
   late Position? initPos = getPosition();
@@ -27,8 +41,7 @@ class _PickLocationState extends State<PickLocation> {
     markerId: const MarkerId("User's Home"),
     infoWindow: const InfoWindow(title: 'Home'),
     icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-    position: LatLng(initPos != null ? initPos?.latitude as double : 13.010651,
-        initPos != null ? initPos?.longitude as double : 80.2331943),
+    position: LatLng(initPos?.latitude as double, initPos?.longitude as double),
   );
 
   Future<Position> getUserLocation() async {
@@ -153,7 +166,7 @@ class _PickLocationState extends State<PickLocation> {
       });
     }
 
-    if (initPos == Null) {
+    if (initPos == null) {
       return const Scaffold(
         backgroundColor: Colors.white,
         body: Center(
@@ -165,6 +178,11 @@ class _PickLocationState extends State<PickLocation> {
       );
     }
 
+    LatLng? _currentMapPosition = markerLatLong;
+    void _onCameraMove(CameraPosition position) {
+      _currentMapPosition = position.target;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Choose location'),
@@ -172,7 +190,10 @@ class _PickLocationState extends State<PickLocation> {
       body: Stack(
         children: [
           GoogleMap(
-            initialCameraPosition: _initialCameraPosition,
+            initialCameraPosition: CameraPosition(
+                target: LatLng(
+                    initPos?.latitude as double, initPos?.longitude as double),
+                zoom: 17),
             zoomControlsEnabled: false,
             myLocationButtonEnabled: true,
             myLocationEnabled: true,
@@ -180,6 +201,7 @@ class _PickLocationState extends State<PickLocation> {
             markers: {
               _userLocation,
             },
+            onCameraMove: _onCameraMove,
             onLongPress: (argument) {
               print('long pressed');
               print(argument);

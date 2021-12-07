@@ -7,12 +7,17 @@ import 'package:fixatease_worker/splash_screen.dart';
 import 'package:flutter/material.dart';
 import '/splash_screen.dart';
 import '/login_screen.dart';
-//import 'package:fixatease_user/location_main.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp(
+      name: 'fixatease_worker',
+      options: const FirebaseOptions(
+          appId: '1:662928174936:android:18f7b2fb2b5e17a3cdbf2d',
+          apiKey: 'AIzaSyAmElocNXCY8i-kI1c4Vj3HDU8VxJlIO9U',
+          messagingSenderId: '662928174936',
+          projectId: 'fixatease'));
   runApp(MyApp());
 }
 

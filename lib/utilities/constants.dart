@@ -26,6 +26,8 @@ const kLabelStyle = TextStyle(
   fontFamily: 'OpenSans',
 );
 
+final kAppBlue = Color(0xFF6CA8F1);
+
 final kBoxDecorationStyle = BoxDecoration(
   color: const Color(0xFF6CA8F1),
   borderRadius: BorderRadius.circular(10.0),
