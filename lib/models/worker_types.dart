@@ -1,14 +1,15 @@
 import 'package:fixatease_worker/assets/worker_icons.dart';
 import 'package:flutter/material.dart';
 
-List<WorkerTypes> workerTypes = <WorkerTypes>[
-  WorkerTypes("Electrician", Icon(WorkerIcons.electrician_svgrepo_com__1_)),
-  WorkerTypes("Carpenter", Icon(WorkerIcons.carpenter_svgrepo_com)),
-  WorkerTypes("Plumber", Icon(WorkerIcons.plumber_svgrepo_com)),
+List<AppointmentCatagories> appointmentCatagories = <AppointmentCatagories>[
+  AppointmentCatagories("Requests"),
+  AppointmentCatagories("Ongoing"),
+  AppointmentCatagories("Rejected"),
 ];
 
-class WorkerTypes {
-  final String workerTitle;
-  final Icon workerIcon;
-  WorkerTypes(this.workerTitle, this.workerIcon);
+class AppointmentCatagories {
+  final String AppointmentTitle;
+  AppointmentCatagories(
+    this.AppointmentTitle,
+  );
 }

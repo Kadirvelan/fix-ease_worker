@@ -2,16 +2,16 @@ import 'package:fixatease_worker/register_details.dart';
 import 'package:fixatease_worker/register_screen.dart';
 import 'package:fixatease_worker/pick_location.dart';
 import 'package:fixatease_worker/services/database.dart';
-import 'package:fixatease_worker/show_workers.dart';
+import 'package:fixatease_worker/show_appointments.dart';
 import 'package:fixatease_worker/splash_screen.dart';
 import 'package:flutter/material.dart';
 import '/splash_screen.dart';
 import '/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+  Firebase.initializeApp(
       name: 'fixatease_worker',
       options: const FirebaseOptions(
           appId: '1:662928174936:android:18f7b2fb2b5e17a3cdbf2d',
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         "/register": (context) => RegisterScreen(),
         "/pick_location": (context) => PickLocation(),
         '/register_details': (context) => RegisterDetails(), //LocationMain()
-        '/show_workers': (context) => ShowWorkers(),
+        '/show_Appointments': (context) => ShowAppointments(),
       },
     );
   }

@@ -150,7 +150,7 @@ Widget buildBtn(String btntext, BuildContext context) {
             "Date of Birth": dateofbirth
           });
 
-          Navigator.pushNamed(context, "/show_workers");
+          Navigator.pushNamed(context, "/show_Appointments");
         }
       },
       style: ElevatedButton.styleFrom(
