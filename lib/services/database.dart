@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fixatease_worker/services/auth_helper.dart';
 import 'package:flutter/cupertino.dart';
 
-User? user = auth.currentUser;
 final FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
 class DatabaseMethods {
+  User? user = auth.currentUser;
   Future adduserInfoToDB(Map<String, dynamic> userInfoMap) async {
     return firestoreInstance
         .collection("workers")
@@ -30,6 +30,7 @@ class DatabaseMethods {
         .collection("Appointments")
         .where("WorkerMail", isEqualTo: user?.email)
         .where("Status", isEqualTo: Status)
+        .orderBy("StartTime", descending: false)
         .snapshots();
   }
 

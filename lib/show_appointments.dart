@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fixatease_worker/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:fixatease_worker/assets/worker_icons.dart';
 import 'get_appointment_details.dart';
@@ -18,12 +21,20 @@ class _ShowAppointmentsState extends State<ShowAppointments> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          toolbarHeight: 0,
+          toolbarHeight: 30,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.logout),
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.pop(context);
+                }),
+          ],
           bottom: TabBar(
               tabs: appointmentCatagories
                   .map((e) => Tab(text: e.AppointmentTitle))
                   .toList()),
-          title: Text('Pick a Service'),
+          title: Text('Appoinments'),
           centerTitle: true,
         ),
         body: const TabBarView(

@@ -57,13 +57,13 @@ class _GetAppointmentDetailsState extends State<GetAppointmentDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(document['UserMail']),
-                    SizedBox(
+                    const SizedBox(
                       height: 5.0,
                     ),
                     Text(DateTime.parse(
                             document['StartTime'].toDate().toString())
                         .toString()),
-                    SizedBox(
+                    const SizedBox(
                       height: 5.0,
                     ),
                     FutureBuilder<DocumentSnapshot>(
@@ -113,7 +113,12 @@ class _GetAppointmentDetailsState extends State<GetAppointmentDetails> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          ElevatedButton(onPressed: () => {}, child: Text("Complete")),
+          ElevatedButton(
+              onPressed: () => {
+                    DatabaseMethods()
+                        .updateAppointmentStatus(document, "Completed")
+                  },
+              child: Text("Complete")),
           const SizedBox(
             width: 10,
           ),
