@@ -5,6 +5,7 @@ import 'package:fixatease_worker/services/auth_helper.dart';
 import 'package:fixatease_worker/register_details.dart';
 import 'package:fixatease_worker/pick_location.dart';
 import 'package:flutter/services.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 
 Widget buildEmailTF(String label, String hinttext) {
   return Column(
@@ -139,6 +140,10 @@ Widget buildBtn(String btntext, BuildContext context) {
         } else if (btntext == 'Login') {
           signIn(context);
         } else if (btntext == 'Confirm details') {
+          Geoflutterfire geo = Geoflutterfire();
+          GeoFirePoint location = geo.point(
+              latitude: markerLatLong?.latitude as double,
+              longitude: markerLatLong?.longitude as double);
           DatabaseMethods().adduserInfoToDB({
             "UserName": userNameController.text,
             "Designation": designationValue,
@@ -147,7 +152,8 @@ Widget buildBtn(String btntext, BuildContext context) {
             "Address": addressController.text,
             "Mobile Number": phoneNumberController.text,
             "Alternate Mobile Number": altphoneNumberController.text,
-            "Date of Birth": dateofbirth
+            "Date of Birth": dateofbirth,
+            "Location": location.data,
           });
 
           Navigator.pushNamed(context, "/show_Appointments");
